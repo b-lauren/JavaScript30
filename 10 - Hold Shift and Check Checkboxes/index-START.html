@@ -96,6 +96,39 @@
   </div>
 
 <script>
+  //select all of the checkboxes on the page
+  const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+  console.log(checkboxes);
+
+  //add an event listener on the checkboxes - will need a loop to select multiple elements
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', checkOff)); //checkOff is function to run when clicked
+
+  //create variable to store name of last item checked
+  let lastChecked;
+
+
+  let inBetween = false;
+
+  function checkOff(e) {
+  //check if user held shift key down
+  //AND check that they are checking the box
+  if(e.shiftKey && this.checked) {
+    //loop over every check box
+    checkboxes.forEach(checkbox => {
+      console.log(checkbox);
+      if (checkbox == this || checkbox == lastChecked) {
+        inBetween = !inBetween;
+      }
+      if(inBetween) {
+        checkbox.checked = true;
+      }
+    });
+  }
+
+  lastChecked = this;
+  console.log(lastChecked);
+}
+
 </script>
 </body>
 </html>
